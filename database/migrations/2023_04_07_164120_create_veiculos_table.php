@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locadoras', function (Blueprint $table) {
+        Schema::create('veiculos', function (Blueprint $table) {
             $table->id();
-            $table->string('fantasia');
-            $table->string('razao_social');
-            $table->string('cnpj')->unique();
-            $table->string('email');
-            $table->string('endereco')->default('null');
+            $table->integer('portas');
+            $table->string('modelo');
+            $table->string('cor');
+            $table->string('fabricante');
+            $table->integer('ano_fabricacao');
+            $table->string('placa')->unique();
+            $table->string('chassi')->unique();
+            $table->string('data_criacao');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locadoras');
+        Schema::dropIfExists('veiculos');
     }
 };

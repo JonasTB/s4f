@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locadoras', function (Blueprint $table) {
+        Schema::create('modelos', function (Blueprint $table) {
             $table->id();
-            $table->string('fantasia');
-            $table->string('razao_social');
-            $table->string('cnpj')->unique();
-            $table->string('email');
-            $table->string('endereco')->default('null');
+            $table->string('nome')->unique();
+            $table->string('montadora')->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locadoras');
+        Schema::dropIfExists('modelos');
     }
 };

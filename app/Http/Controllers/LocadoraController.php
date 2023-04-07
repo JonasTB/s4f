@@ -31,11 +31,7 @@ class LocadoraController extends Controller
 
         if($validator->passes()) {
             $locadora = new Locadora();
-            $locadora->fantasia = $request->fantasia;
-            $locadora->razao_social = $request->razao_social;
-            $locadora->cnpj = $request->cnpj;
-            $locadora->email = $request->email;
-            $locadora->endereco = $request->endereco;
+            $locadora->fill($request->post())->save();
 
             $locadora->save();
 
@@ -51,7 +47,7 @@ class LocadoraController extends Controller
         return view('locadora.edit', ['locadora' => $locadora]);
     }
 
-    public function update($id, Request $request)
+    public function update(Locadora $locadora, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'fantasia' => 'required',
@@ -62,18 +58,11 @@ class LocadoraController extends Controller
         ]);
 
         if($validator->passes()) {
-            $locadora = Locadora::find($id);
-            $locadora->fantasia = $request->fantasia;
-            $locadora->razao_social = $request->razao_social;
-            $locadora->cnpj = $request->cnpj;
-            $locadora->email = $request->email;
-            $locadora->endereco = $request->endereco;
-
-            $locadora->save();
+            $locadora->fill($request->post())->save();
 
             return redirect()->route('locadoras.index')->with('success', 'Locadora atualizada com sucesso');
         } else {
-            return redirect()->route('locadoras.edit', $id)->withErrors($validator)->withInput();
+            return redirect()->route('locadoras.edit', $locadora->id)->withErrors($validator)->withInput();
         }
     }
 

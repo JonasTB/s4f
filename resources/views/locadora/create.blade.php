@@ -76,7 +76,7 @@
                         <label for="endereco" class="form-label">Endereço</label>
                         <input type="text" name="endereco" id="endereco" placeholder="Digite o endereço"
                             class="form-control
-                        @error('email') is-invalid @enderror" value="{{ old('endereco') }}">
+                        @error('endereco') is-invalid @enderror" value="{{ old('endereco') }}">
 
                         @error('endereco')
                             <p class="invalid-feedback">{{ $message }}</p>
